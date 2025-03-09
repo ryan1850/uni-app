@@ -1,4 +1,4 @@
-# my-project
+# uni-app
 
 ## Project setup
 ```

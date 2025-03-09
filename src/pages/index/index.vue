@@ -4,21 +4,39 @@
 		<view>
 			<text class="title">{{title}}</text>
 		</view>
+		<button type="primary" @click="uploadImg">上传图片</button>
+		<ImageCropper v-if="imgSrc" mode="widthFix" img_width="300" img_height="300" :imgSrc="imgSrc" />
 	</view>
 </template>
 
 <script>
+import ImageCropper from "../../components/ImageCropper/index.vue";
 	export default {
+		components: {
+			ImageCropper
+		},
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
+				imgSrc: ''
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-
+          // 上传图片
+          uploadImg() {
+            let that = this;
+            uni.chooseImage({
+              count: 1,
+              sizeType: ['original', 'compressed'],
+              sourceType: ['album', 'camera'],
+              success: function(res) {
+                that.imgSrc = res.tempFilePaths[0];
+              }
+            });
+          }
 		}
 	}
 </script>
